@@ -57,16 +57,6 @@ const APELLIDOS_NOMBRE = "MONTAÑO ROJAS";
         </h2>
     </div>
 
-    <!-- Texto especial -->
-    <div id="hero-texto" class="mb-6 opacity-0 max-w-xs md:max-w-md px-4">
-        <p
-            class="font-crimson text-lg md:text-base text-[#4a7a9b] italic leading-relaxed tracking-wide"
-        >
-            "En este día tan especial, la luz de Dios se encenderá en mi corazón
-            para iluminar todo el camino de mi vida."
-        </p>
-    </div>
-
     <!-- Separador dorado ornamental -->
     <div id="hero-sep-dorado" class="flex items-center gap-3 mb-5 opacity-0">
         <div
@@ -100,6 +90,7 @@ const APELLIDOS_NOMBRE = "MONTAÑO ROJAS";
     document.addEventListener("DOMContentLoaded", () => {
         const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
+        // Todos entran al mismo tiempo
         tl.to("#hero-paloma", { opacity: 1, y: 0, duration: 1 }, 0)
             .to("#hero-subtitulo", { opacity: 1, y: 0, duration: 0.9 }, 0)
             .to(
@@ -109,7 +100,6 @@ const APELLIDOS_NOMBRE = "MONTAÑO ROJAS";
             )
             .to("#hero-nombre-top", { opacity: 1, y: 0, duration: 1 }, 0)
             .to("#hero-nombre-bottom", { opacity: 1, y: 0, duration: 1 }, 0)
-            .to("#hero-texto", { opacity: 1, y: 0, duration: 1 }, 0)
             .to(
                 "#hero-sep-dorado",
                 { opacity: 1, scaleX: 1, duration: 0.8, ease: "power2.out" },
@@ -125,12 +115,13 @@ const APELLIDOS_NOMBRE = "MONTAÑO ROJAS";
                 });
             });
 
+        // Se pausa y solo arranca una vez al entrar al viewport
         tl.pause();
 
         ScrollTrigger.create({
             trigger: "section",
             start: "top 90%",
-            once: true,
+            once: true, // ← una sola vez, nunca más se repite
             onEnter: () => tl.play(),
         });
     });
