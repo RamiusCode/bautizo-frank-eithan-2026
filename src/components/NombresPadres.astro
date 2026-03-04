@@ -1,0 +1,199 @@
+---
+// src/components/Padres.astro
+const PADRE = "Rene Montaño Obando";
+const MADRE = "Vania Rojas Perez";
+const MADRINA_BAU = "Eleuteria Obando Blanco";
+const MADRINA_PELO = "Kardinia Rojas Perez";
+---
+
+<section
+    class="relative w-full flex flex-col items-center text-center py-8 px-6 overflow-visible"
+>
+    <!-- PADRES -->
+    <div id="padres-titulo" class="mb-2 opacity-0">
+        <p
+            class="font-crimson text-xl md:text-sm font-normal text-[#D4AF37] uppercase"
+        >
+            Padres
+        </p>
+    </div>
+    <div id="padres-nombres" class="mb-8 opacity-0 flex flex-col items-center">
+        <p
+            class="font-crimson text-lg md:text-xl font-normal text-[#3a5f80] tracking-widest"
+        >
+            {PADRE}
+        </p>
+        <p
+            class="font-crimson text-lg md:text-xl font-normal text-[#3a5f80] tracking-widests"
+        >
+            {MADRE}
+        </p>
+    </div>
+
+    <!-- Separador dorado -->
+    <!-- <div id="sep-1" class="flex items-center gap-3 mb-8 opacity-0">
+        <div
+            class="h-px w-16 md:w-24 bg-gradient-to-r from-transparent to-[#c9a84c]"
+        >
+        </div>
+        <svg
+            width="10"
+            height="10"
+            viewBox="0 0 20 20"
+            fill="#c9a84c"
+            class="opacity-80 flex-shrink-0"
+        >
+            <path
+                d="M10 2 L11.5 8 L18 8 L12.5 12 L14.5 18 L10 14 L5.5 18 L7.5 12 L2 8 L8.5 8 Z"
+            ></path>
+        </svg>
+        <div
+            class="h-px w-16 md:w-24 bg-gradient-to-l from-transparent to-[#c9a84c]"
+        >
+        </div>
+    </div> -->
+
+    <!-- MADRINA DE BAUTIZO -->
+    <div id="madrina-bau-titulo" class="mb-2 opacity-0">
+        <p
+            class="font-crimson text-xl md:text-sm font-normal text-[#D4AF37] uppercase"
+        >
+            Madrina de Bautizo
+        </p>
+    </div>
+    <div id="madrina-bau-nombre" class="mb-8 opacity-0">
+        <p
+            class="font-crimson text-xl md:text-xl font-normal text-[#3a5f80] tracking-widests"
+        >
+            {MADRINA_BAU}
+        </p>
+    </div>
+
+    <!-- Separador dorado -->
+    <!-- <div id="sep-2" class="flex items-center gap-3 mb-8 opacity-0">
+        <div
+            class="h-px w-16 md:w-24 bg-gradient-to-r from-transparent to-[#c9a84c]"
+        >
+        </div>
+        <svg
+            width="10"
+            height="10"
+            viewBox="0 0 20 20"
+            fill="#c9a84c"
+            class="opacity-80 flex-shrink-0"
+        >
+            <path
+                d="M10 2 L11.5 8 L18 8 L12.5 12 L14.5 18 L10 14 L5.5 18 L7.5 12 L2 8 L8.5 8 Z"
+            ></path>
+        </svg>
+        <div
+            class="h-px w-16 md:w-24 bg-gradient-to-l from-transparent to-[#c9a84c]"
+        >
+        </div>
+    </div> -->
+
+    <!-- MADRINA DE CORTE DE PELO -->
+    <div id="madrina-pelo-titulo" class="mb-2 opacity-0">
+        <p
+            class="font-crimson text-xl md:text-xl font-normal text-[#D4AF37] uppercase"
+        >
+            Madrina de Corte de Pelo
+        </p>
+    </div>
+    <div id="madrina-pelo-nombre" class="mb-8 opacity-0">
+        <p
+            class="font-crimson text-lg md:text-xl font-normal text-[#3a5f80] tracking-widests"
+        >
+            {MADRINA_PELO}
+        </p>
+    </div>
+
+    <!-- Separador dorado final -->
+    <div id="sep-3" class="flex items-center gap-3 opacity-0">
+        <div
+            class="h-px w-16 md:w-24 bg-gradient-to-r from-transparent to-[#c9a84c]"
+        >
+        </div>
+        <svg
+            width="10"
+            height="10"
+            viewBox="0 0 20 20"
+            fill="#c9a84c"
+            class="opacity-80 flex-shrink-0"
+        >
+            <path
+                d="M10 2 L11.5 8 L18 8 L12.5 12 L14.5 18 L10 14 L5.5 18 L7.5 12 L2 8 L8.5 8 Z"
+            ></path>
+        </svg>
+        <div
+            class="h-px w-16 md:w-24 bg-gradient-to-l from-transparent to-[#c9a84c]"
+        >
+        </div>
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const tl = gsap.timeline({
+            defaults: { ease: "power3.out" },
+            paused: true,
+        });
+
+        // Todos entran al mismo tiempo — posición 0
+        tl.fromTo(
+            "#padres-titulo",
+            { opacity: 0, y: -18 },
+            { opacity: 1, y: 0, duration: 0.9 },
+            0,
+        )
+            .fromTo(
+                "#padres-nombres",
+                { opacity: 0, y: 22 },
+                { opacity: 1, y: 0, duration: 1 },
+                0,
+            )
+            .fromTo(
+                "#madrina-bau-titulo",
+                { opacity: 0, y: -18 },
+                { opacity: 1, y: 0, duration: 0.9 },
+                0,
+            )
+            .fromTo(
+                "#madrina-bau-nombre",
+                { opacity: 0, y: 22 },
+                { opacity: 1, y: 0, duration: 1 },
+                0,
+            )
+            .fromTo(
+                "#madrina-pelo-titulo",
+                { opacity: 0, y: -18 },
+                { opacity: 1, y: 0, duration: 0.9 },
+                0,
+            )
+            .fromTo(
+                "#madrina-pelo-nombre",
+                { opacity: 0, y: 22 },
+                { opacity: 1, y: 0, duration: 1 },
+                0,
+            )
+            .fromTo(
+                "#sep-3",
+                { opacity: 0, scaleX: 0.2 },
+                { opacity: 1, scaleX: 1, duration: 0.8, ease: "power2.inOut" },
+                0,
+            );
+
+        // Una sola vez al entrar al viewport
+        ScrollTrigger.create({
+            trigger: "section",
+            start: "top 85%",
+            once: true,
+            onEnter: () => tl.play(),
+        });
+    });
+</script>

@@ -1,0 +1,169 @@
+---
+// ConfirmarAsistencia.astro
+---
+
+<section class="relative w-full overflow-hidden py-12 px-8">
+    <!-- Flores inferiores pegadas al borde -->
+    <div class="absolute bottom-0 left-0 pointer-events-none z-0">
+        <img
+            src="/imagenes/florLateral.png"
+            alt=""
+            class="w-36 md:w-44 h-auto object-contain opacity-90"
+        />
+    </div>
+    <div class="absolute bottom-0 right-0 pointer-events-none z-0 scale-x-[-1]">
+        <img
+            src="/imagenes/florLateral.png"
+            alt=""
+            class="w-36 md:w-44 h-auto object-contain opacity-90"
+        />
+    </div>
+
+    <!-- Contenido -->
+    <div class="relative z-10 max-w-sm mx-auto flex flex-col items-center">
+        <!-- Texto superior con borde suave -->
+        <!-- <div id="ca-texto" class="opacity-0 mb-10 w-full">
+            <div
+                class="border border-[#a8c4dc]/50 rounded-xl px-6 py-5 bg-white/30 backdrop-blur-sm"
+            >
+                <p
+                    class="font-crimson text-xl md:text-base text-[#2a4a6a] leading-relaxed text-center"
+                >
+                    La fiesta comenzará puntualmente, y queremos que disfrutes
+                    con nosotros de cada detalle.
+                    <br /><br />
+                    ¡Te agradeceríamos que llegues a tiempo!
+                </p>
+            </div>
+        </div> -->
+
+        <!-- Separador dorado -->
+        <div
+            id="ca-sep"
+            class="flex items-center gap-3 mb-10 opacity-0 w-full max-w-xs"
+        >
+            <div
+                class="h-px flex-1 bg-gradient-to-r from-transparent to-[#c9a84c]"
+            >
+            </div>
+            <svg
+                width="8"
+                height="8"
+                viewBox="0 0 20 20"
+                fill="#c9a84c"
+                class="opacity-80 flex-shrink-0"
+            >
+                <path
+                    d="M10 2 L11.5 8 L18 8 L12.5 12 L14.5 18 L10 14 L5.5 18 L7.5 12 L2 8 L8.5 8 Z"
+                ></path>
+            </svg>
+            <div
+                class="h-px flex-1 bg-gradient-to-l from-transparent to-[#c9a84c]"
+            >
+            </div>
+        </div>
+
+        <!-- Texto importante -->
+        <div id="ca-importante" class="opacity-0 mb-10 text-center">
+            <p
+                class="font-crimson text-xl md:text-lg text-[#1f4d7a] font-semibold uppercase tracking-[0.15em] leading-relaxed"
+            >
+                Por favor<br />confirma tu asistencia
+            </p>
+        </div>
+
+        <!-- Botones confirmar -->
+        <div
+            id="ca-boton"
+            class="opacity-0 mb-28 flex flex-col gap-4 w-full items-center"
+        >
+            <!-- Botón Rene -->
+            <a
+                href="https://wa.link/e4nzf7"
+                target="_blank"
+                class="bg-[#1f4d7a] hover:bg-[#3a6fa0] text-white px-10 py-3.5 rounded-full font-crimson text-sm tracking-[0.2em] uppercase font-semibold transition-all duration-300 shadow-lg hover:shadow-xl block w-full text-center"
+                id="boton-rene"
+            >
+                Confirmar a Rene
+            </a>
+            <!-- Botón Vania -->
+            <a
+                href="https://wa.link/qpv0or"
+                target="_blank"
+                class="bg-[#1f4d7a] hover:bg-[#3a6fa0] text-white px-10 py-3.5 rounded-full font-crimson text-sm tracking-[0.2em] uppercase font-semibold transition-all duration-300 shadow-lg hover:shadow-xl block w-full text-center"
+                id="boton-vania"
+            >
+                Confirmar a Vania
+            </a>
+        </div>
+    </div>
+</section>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap"
+    rel="stylesheet"
+/>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // Estado inicial
+        gsap.set("#ca-texto", { opacity: 0, y: 30, scale: 0.97 });
+        gsap.set("#ca-sep", { opacity: 0, scaleX: 0.2 });
+        gsap.set("#ca-importante", { opacity: 0, y: 20 });
+        gsap.set("#ca-boton", { opacity: 0, y: 25, scale: 0.9 });
+
+        const tl = gsap.timeline({
+            paused: true,
+            defaults: { ease: "power3.out" },
+        });
+
+        tl.to("#ca-texto", { opacity: 1, y: 0, scale: 1, duration: 1.1 }, 0)
+            .to(
+                "#ca-sep",
+                { opacity: 1, scaleX: 1, duration: 0.9, ease: "power2.inOut" },
+                0.3,
+            )
+            .to("#ca-importante", { opacity: 1, y: 0, duration: 0.9 }, 0.55)
+            .to(
+                "#ca-boton",
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 1,
+                    ease: "back.out(1.6)",
+                },
+                0.75,
+            )
+            .call(() => {
+                gsap.to("#boton-rene", {
+                    scale: 1.04,
+                    duration: 1.5,
+                    ease: "sine.inOut",
+                    yoyo: true,
+                    repeat: -1,
+                });
+                gsap.to("#boton-vania", {
+                    scale: 1.04,
+                    duration: 1.5,
+                    ease: "sine.inOut",
+                    yoyo: true,
+                    repeat: -1,
+                    delay: 0.75,
+                });
+            });
+
+        // Una sola vez
+        ScrollTrigger.create({
+            trigger: "#ca-texto",
+            start: "top 88%",
+            once: true,
+            onEnter: () => tl.play(),
+        });
+    });
+</script>

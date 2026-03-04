@@ -1,0 +1,142 @@
+---
+// src/components/HeroBautizo.astro
+const NOMBRES = "Frank Eithan";
+const APELLIDOS_NOMBRE = "MONTAÑO ROJAS";
+---
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@400;500&family=Cinzel:wght@300;400&display=swap"
+    rel="stylesheet"
+/>
+
+<section
+    class="relative w-full flex flex-col items-center text-center pt-8 px-6 overflow-visible"
+>
+    <!-- Paloma -->
+    <div id="hero-paloma" class="mb-5 opacity-0">
+        <img
+            src="/imagenes/paloma.png"
+            alt="Paloma"
+            class="w-10 md:w-16 h-auto object-contain mx-auto"
+        />
+    </div>
+
+    <!-- Mi Bautizo -->
+    <div id="hero-subtitulo" class="mb-5 opacity-0">
+        <p
+            class="font-[Dancing_Script] text-4xl md:text-4xl font-medium text-[#3a6fa0] tracking-wide"
+        >
+            Mi Bautizo
+        </p>
+    </div>
+
+    <!-- Separador azul fino -->
+    <div
+        id="hero-sep-top"
+        class="w-36 h-px bg-[#a8c4dc] mb-6 opacity-0 origin-center scale-x-0"
+    >
+    </div>
+
+    <!-- Nombres arriba (Frank Eithan) -->
+    <div id="hero-nombre-top" class="mb-1 opacity-0">
+        <h1
+            class="font-[Great_Vibes] text-5xl md:text-8xl lg:text-9xl font-normal text-[#1f4d7a] leading-none"
+        >
+            {NOMBRES}
+        </h1>
+    </div>
+
+    <!-- Apellidos abajo (Montaño Rojas) -->
+    <div id="hero-nombre-bottom" class="mb-4 pt-4 opacity-0">
+        <h2
+            class="font-crimson text-xl md:text-8xl lg:text-9xl font-normal text-[#1f4d7a] leading-none tracking-widest"
+        >
+            {APELLIDOS_NOMBRE}
+        </h2>
+    </div>
+
+    <!-- Separador dorado ornamental -->
+    <div id="hero-sep-dorado" class="flex items-center gap-3 mb-5 opacity-0">
+        <div
+            class="h-px w-20 md:w-28 bg-gradient-to-r from-transparent to-[#c9a84c]"
+        >
+        </div>
+        <svg
+            width="12"
+            height="12"
+            viewBox="0 0 20 20"
+            fill="#c9a84c"
+            class="opacity-80 flex-shrink-0"
+        >
+            <path
+                d="M10 2 L11.5 8 L18 8 L12.5 12 L14.5 18 L10 14 L5.5 18 L7.5 12 L2 8 L8.5 8 Z"
+            ></path>
+        </svg>
+        <div
+            class="h-px w-20 md:w-28 bg-gradient-to-l from-transparent to-[#c9a84c]"
+        >
+        </div>
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+        tl.fromTo(
+            "#hero-paloma",
+            { opacity: 0, y: -30 },
+            { opacity: 1, y: 0, duration: 1 },
+        )
+            .fromTo(
+                "#hero-subtitulo",
+                { opacity: 0, y: -20 },
+                { opacity: 1, y: 0, duration: 0.9 },
+                "-=0.5",
+            )
+            .fromTo(
+                "#hero-sep-top",
+                { opacity: 0, scaleX: 0 },
+                { opacity: 1, scaleX: 1, duration: 0.7, ease: "power2.inOut" },
+                "-=0.3",
+            )
+            .fromTo(
+                "#hero-nombre-top",
+                { opacity: 0, y: 30 },
+                { opacity: 1, y: 0, duration: 1 },
+                "-=0.2",
+            )
+            .fromTo(
+                "#hero-nombre-bottom",
+                { opacity: 0, y: 30 },
+                { opacity: 1, y: 0, duration: 1 },
+                "-=0.6",
+            )
+            .fromTo(
+                "#hero-sep-dorado",
+                { opacity: 0, scaleX: 0.4 },
+                { opacity: 1, scaleX: 1, duration: 0.8, ease: "power2.out" },
+                "-=0.3",
+            )
+            .fromTo(
+                "#hero-nota",
+                { opacity: 0, scale: 0.3 },
+                { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(2)" },
+                "-=0.2",
+            );
+
+        // Paloma flotando infinita
+        gsap.to("#hero-paloma", {
+            y: -8,
+            duration: 2.5,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+            delay: 1.5,
+        });
+    });
+</script>

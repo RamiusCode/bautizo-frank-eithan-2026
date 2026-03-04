@@ -1,0 +1,445 @@
+---
+// Itinerario.astro - Bautizo
+---
+
+<section class="px-4 relative overflow-hidden py-6">
+    <div class="max-w-3xl mx-auto relative z-10">
+        <!-- Título -->
+        <div class="text-center mb-10 titulo-itinerario opacity-0">
+            <!-- <p
+                class="font-crimson text-[10px] tracking-[0.5em] uppercase text-[#c9a84c] mb-1"
+            >
+                Programa del día
+            </p> -->
+            <h2
+                class="font-[Dancing_Script] text-4xl md:text-5xl text-[#1f4d7a] mb-3"
+            >
+                Itinerario
+            </h2>
+            <div class="flex items-center justify-center gap-3">
+                <div
+                    class="w-16 h-px bg-gradient-to-r from-transparent to-[#c9a84c]"
+                >
+                </div>
+                <svg
+                    width="10"
+                    height="10"
+                    viewBox="0 0 20 20"
+                    fill="#c9a84c"
+                    class="opacity-90"
+                >
+                    <path
+                        d="M10 2 L11.5 8 L18 8 L12.5 12 L14.5 18 L10 14 L5.5 18 L7.5 12 L2 8 L8.5 8 Z"
+                    ></path>
+                </svg>
+                <div
+                    class="w-16 h-px bg-gradient-to-l from-transparent to-[#c9a84c]"
+                >
+                </div>
+            </div>
+        </div>
+
+        <div class="relative px-4 md:px-8" id="eventos-container">
+            <!-- Línea central vertical -->
+            <div
+                class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#a8c4dc] to-transparent linea-central opacity-0"
+            >
+            </div>
+
+            <!-- ── EVENTO 1: Misa ── -->
+            <div class="flex justify-center mb-2">
+                <div class="nodo-item opacity-0 relative z-10">
+                    <div
+                        class="w-5 h-5 rounded-full bg-white border border-[#c9a84c] shadow-[0_0_0_4px_rgba(201,168,76,0.12)] flex items-center justify-center"
+                    >
+                        <div class="w-1.5 h-1.5 rounded-full bg-[#c9a84c]">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="evento-item grid grid-cols-2 gap-6 md:gap-12 pb-8 opacity-0"
+            >
+                <div
+                    class="flex flex-col items-center justify-center imagen-izq"
+                >
+                    <img
+                        src="/imagenes/bautismo.png"
+                        alt="Misa"
+                        class="w-14 h-14 md:w-16 md:h-16 object-contain azul-filter hover:scale-110 transition-transform duration-300"
+                    />
+                </div>
+                <div class="flex flex-col justify-center text-center texto-der">
+                    <p
+                        class="font-crimson text-lg md:text-xl text-[#1f4d7a] font-semibold tracking-wide"
+                    >
+                        Misa
+                    </p>
+                    <p
+                        class="font-[Dancing_Script] text-xl md:text-2xl text-[#c9a84c]"
+                    >
+                        14:00 Hrs
+                    </p>
+                </div>
+            </div>
+
+            <!-- ── EVENTO 2: Recepción ── -->
+            <div class="flex justify-center mb-2">
+                <div class="nodo-item opacity-0 relative z-10">
+                    <div
+                        class="w-5 h-5 rounded-full bg-white border border-[#c9a84c] shadow-[0_0_0_4px_rgba(201,168,76,0.12)] flex items-center justify-center"
+                    >
+                        <div class="w-1.5 h-1.5 rounded-full bg-[#c9a84c]">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="evento-item grid grid-cols-2 gap-6 md:gap-12 pb-8 opacity-0"
+            >
+                <div class="flex flex-col justify-center text-center texto-izq">
+                    <p
+                        class="font-crimson text-lg md:text-xl text-[#1f4d7a] font-semibold tracking-wide"
+                    >
+                        Recepción
+                    </p>
+                    <p
+                        class="font-[Dancing_Script] text-xl md:text-2xl text-[#c9a84c]"
+                    >
+                        15:00 Hrs
+                    </p>
+                </div>
+                <div
+                    class="flex flex-col items-center justify-center imagen-der"
+                >
+                    <img
+                        src="/imagenes/cafe.png"
+                        alt="Recepción"
+                        class="w-14 h-14 md:w-16 md:h-16 object-contain azul-filter hover:scale-110 transition-transform duration-300"
+                    />
+                </div>
+            </div>
+
+            <!-- ── EVENTO 3: Cumpleaños ── -->
+            <div class="flex justify-center mb-2">
+                <div class="nodo-item opacity-0 relative z-10">
+                    <div
+                        class="w-5 h-5 rounded-full bg-white border border-[#c9a84c] shadow-[0_0_0_4px_rgba(201,168,76,0.12)] flex items-center justify-center"
+                    >
+                        <div class="w-1.5 h-1.5 rounded-full bg-[#c9a84c]">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="evento-item grid grid-cols-2 gap-6 md:gap-12 pb-8 opacity-0"
+            >
+                <div
+                    class="flex flex-col items-center justify-center imagen-izq"
+                >
+                    <img
+                        src="/imagenes/fiesta.png"
+                        alt="Cumpleaños"
+                        class="w-14 h-14 md:w-16 md:h-16 object-contain azul-filter hover:scale-110 transition-transform duration-300"
+                    />
+                </div>
+                <div class="flex flex-col justify-center text-center texto-der">
+                    <p
+                        class="font-crimson text-lg md:text-xl text-[#1f4d7a] font-semibold tracking-wide"
+                    >
+                        Cumpleaños
+                    </p>
+                    <p
+                        class="font-crimson text-[10px] uppercase tracking-widest text-[#4a7a9b] mb-0.5"
+                    >
+                        Niños
+                    </p>
+                    <p
+                        class="font-[Dancing_Script] text-xl md:text-2xl text-[#c9a84c]"
+                    >
+                        15:30 Hrs
+                    </p>
+                </div>
+            </div>
+
+            <!-- ── EVENTO 4: Cena ── -->
+            <div class="flex justify-center mb-2">
+                <div class="nodo-item opacity-0 relative z-10">
+                    <div
+                        class="w-5 h-5 rounded-full bg-white border border-[#c9a84c] shadow-[0_0_0_4px_rgba(201,168,76,0.12)] flex items-center justify-center"
+                    >
+                        <div class="w-1.5 h-1.5 rounded-full bg-[#c9a84c]">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="evento-item grid grid-cols-2 gap-6 md:gap-12 pb-8 opacity-0"
+            >
+                <div class="flex flex-col justify-center text-center texto-izq">
+                    <p
+                        class="font-crimson text-lg md:text-xl text-[#1f4d7a] font-semibold tracking-wide"
+                    >
+                        Cena
+                    </p>
+                    <p
+                        class="font-[Dancing_Script] text-xl md:text-2xl text-[#c9a84c]"
+                    >
+                        18:00 Hrs
+                    </p>
+                </div>
+                <div
+                    class="flex flex-col items-center justify-center imagen-der"
+                >
+                    <img
+                        src="/imagenes/restaurante.png"
+                        alt="Cena"
+                        class="w-14 h-14 md:w-16 md:h-16 object-contain azul-filter hover:scale-110 transition-transform duration-300"
+                    />
+                </div>
+            </div>
+
+            <!-- ── EVENTO 5: Corte de Cabello ── -->
+            <div class="flex justify-center mb-2">
+                <div class="nodo-item opacity-0 relative z-10">
+                    <div
+                        class="w-5 h-5 rounded-full bg-white border border-[#c9a84c] shadow-[0_0_0_4px_rgba(201,168,76,0.12)] flex items-center justify-center"
+                    >
+                        <div class="w-1.5 h-1.5 rounded-full bg-[#c9a84c]">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="evento-item grid grid-cols-2 gap-6 md:gap-12 pb-8 opacity-0"
+            >
+                <div
+                    class="flex flex-col items-center justify-center imagen-izq"
+                >
+                    <img
+                        src="/imagenes/tijera.png"
+                        alt="Corte de Cabello"
+                        class="w-14 h-14 md:w-16 md:h-16 object-contain azul-filter hover:scale-110 transition-transform duration-300"
+                    />
+                </div>
+                <div class="flex flex-col justify-center text-center texto-der">
+                    <p
+                        class="font-crimson text-lg md:text-xl text-[#1f4d7a] font-semibold tracking-wide"
+                    >
+                        Corte de Cabello
+                    </p>
+                    <p
+                        class="font-[Dancing_Script] text-xl md:text-2xl text-[#c9a84c]"
+                    >
+                        19:00 Hrs
+                    </p>
+                </div>
+            </div>
+
+            <!-- ── EVENTO 6: Grupos en Vivo ── -->
+            <div class="flex justify-center mb-2">
+                <div class="nodo-item opacity-0 relative z-10">
+                    <div
+                        class="w-5 h-5 rounded-full bg-white border border-[#c9a84c] shadow-[0_0_0_4px_rgba(201,168,76,0.12)] flex items-center justify-center"
+                    >
+                        <div class="w-1.5 h-1.5 rounded-full bg-[#c9a84c]">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="evento-item grid grid-cols-2 gap-6 md:gap-12 pb-8 opacity-0"
+            >
+                <div class="flex flex-col justify-center text-center texto-izq">
+                    <p
+                        class="font-crimson text-lg md:text-xl text-[#1f4d7a] font-semibold tracking-wide"
+                    >
+                        Grupos en Vivo
+                    </p>
+                    <p
+                        class="font-[Dancing_Script] text-xl md:text-2xl text-[#c9a84c]"
+                    >
+                        21:00 Hrs
+                    </p>
+                </div>
+                <div
+                    class="flex flex-col items-center justify-center imagen-der"
+                >
+                    <img
+                        src="/imagenes/musica2.png"
+                        alt="Grupos en Vivo"
+                        class="w-14 h-14 md:w-16 md:h-16 object-contain azul-filter hover:scale-110 transition-transform duration-300"
+                    />
+                </div>
+            </div>
+
+            <!-- Nodo final -->
+            <div class="flex justify-center">
+                <div class="nodo-item opacity-0 relative z-10">
+                    <div
+                        class="w-5 h-5 rounded-full bg-[#c9a84c] shadow-[0_0_0_4px_rgba(201,168,76,0.18)] flex items-center justify-center"
+                    >
+                        <svg
+                            width="8"
+                            height="8"
+                            viewBox="0 0 20 20"
+                            fill="white"
+                        >
+                            <path
+                                d="M10 2 L11.5 8 L18 8 L12.5 12 L14.5 18 L10 14 L5.5 18 L7.5 12 L2 8 L8.5 8 Z"
+                            ></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap"
+    rel="stylesheet"
+/>
+
+<style>
+    .azul-filter {
+        filter: brightness(0) saturate(100%) invert(22%) sepia(60%)
+            saturate(600%) hue-rotate(190deg) brightness(90%) contrast(95%);
+        transition:
+            filter 0.3s ease,
+            transform 0.3s ease;
+    }
+    .nodo-item > div {
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+    }
+    .nodo-item:hover > div {
+        transform: scale(1.25);
+        box-shadow: 0 0 0 6px rgba(201, 168, 76, 0.2);
+    }
+    .linea-central {
+        box-shadow: 0 0 8px rgba(168, 196, 220, 0.2);
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const initItinerario = () => {
+        gsap.set(".titulo-itinerario", { opacity: 0, y: -25 });
+        gsap.set(".linea-central", {
+            opacity: 0,
+            scaleY: 0,
+            transformOrigin: "top center",
+        });
+        gsap.set(".nodo-item", { opacity: 0, scale: 0 });
+        gsap.set(".evento-item", { opacity: 0 });
+        gsap.set(".imagen-izq", { x: -50, opacity: 0 });
+        gsap.set(".texto-izq", { x: -50, opacity: 0 });
+        gsap.set(".imagen-der", { x: 50, opacity: 0 });
+        gsap.set(".texto-der", { x: 50, opacity: 0 });
+
+        ScrollTrigger.create({
+            trigger: ".titulo-itinerario",
+            start: "top 85%",
+            once: true,
+            onEnter: () => {
+                gsap.to(".titulo-itinerario", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: "power3.out",
+                });
+            },
+        });
+
+        ScrollTrigger.create({
+            trigger: "#eventos-container",
+            start: "top 80%",
+            onEnter: () => {
+                const tl = gsap.timeline();
+
+                tl.to(
+                    ".linea-central",
+                    {
+                        opacity: 1,
+                        scaleY: 1,
+                        duration: 1.8,
+                        ease: "power2.out",
+                    },
+                    0,
+                )
+                    .to(
+                        ".nodo-item",
+                        {
+                            opacity: 1,
+                            scale: 1,
+                            duration: 0.5,
+                            ease: "back.out(2)",
+                            stagger: 0.18,
+                        },
+                        0.3,
+                    )
+                    .to(
+                        ".evento-item",
+                        {
+                            opacity: 1,
+                            duration: 0.7,
+                            ease: "power2.out",
+                            stagger: 0.18,
+                        },
+                        0.3,
+                    )
+                    .to(
+                        ".imagen-izq, .texto-izq",
+                        {
+                            x: 0,
+                            opacity: 1,
+                            duration: 0.9,
+                            ease: "power3.out",
+                            stagger: 0.18,
+                        },
+                        0.3,
+                    )
+                    .to(
+                        ".imagen-der, .texto-der",
+                        {
+                            x: 0,
+                            opacity: 1,
+                            duration: 0.9,
+                            ease: "power3.out",
+                            stagger: 0.18,
+                        },
+                        0.3,
+                    );
+            },
+
+            onLeaveBack: () => {
+                gsap.to(".linea-central", {
+                    opacity: 0,
+                    scaleY: 0,
+                    duration: 0.4,
+                });
+                gsap.to(".nodo-item", { opacity: 0, scale: 0, duration: 0.4 });
+                gsap.to(".evento-item", { opacity: 0, duration: 0.4 });
+                gsap.to(".imagen-izq, .texto-izq", {
+                    x: -50,
+                    opacity: 0,
+                    duration: 0.4,
+                });
+                gsap.to(".imagen-der, .texto-der", {
+                    x: 50,
+                    opacity: 0,
+                    duration: 0.4,
+                });
+            },
+        });
+    };
+
+    document.addEventListener("DOMContentLoaded", initItinerario);
+    document.addEventListener("astro:page-load", initItinerario);
+</script>

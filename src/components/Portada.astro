@@ -1,0 +1,166 @@
+---
+// src/components/Portada.astro
+---
+
+<section
+    class="fixed inset-0 w-full h-screen flex justify-center items-center z-[10000]"
+    id="portada-section"
+    style="
+        background-image: url('/imagenes/pres.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    "
+>
+    <div class="relative w-full max-w-[480px] px-6">
+        <!-- Flor superior izquierda — pegada arriba al costado -->
+        <div id="hoja-1" class="absolute -top-10 -left-6 w-28 h-48 z-0">
+            <img
+                src="/imagenes/florlateral.png"
+                alt=""
+                class="w-full h-full object-contain"
+            />
+        </div>
+
+        <!-- Flor superior derecha — espejo horizontal -->
+        <div id="hoja-2" class="absolute -top-10 -right-6 w-28 h-48 z-0">
+            <img
+                src="/imagenes/florlateral.png"
+                alt=""
+                class="w-full h-full object-contain scale-x-[-1]"
+            />
+        </div>
+
+        <!-- Contenido -->
+        <div class="relative z-10 text-center pt-8">
+            <!-- Paloma -->
+            <div class="mb-4 flex justify-center" id="portada-paloma">
+                <img
+                    src="/imagenes/paloma.png"
+                    alt="Paloma"
+                    class="w-20 md:w-24 h-auto object-contain drop-shadow-md"
+                />
+            </div>
+
+            <!-- Mi Bautizo -->
+            <div class="mb-2">
+                <p
+                    class="font-[Dancing_Script] text-3xl md:text-4xl font-medium text-[#3a6fa0] tracking-wide"
+                >
+                    Mi Bautizo
+                </p>
+            </div>
+
+            <!-- Separador -->
+            <div class="flex justify-center mb-4">
+                <div class="w-28 h-px bg-[#a8c4dc]"></div>
+            </div>
+
+            <!-- Nombre -->
+            <div class="mb-10">
+                <h1
+                    class="font-[Great_Vibes] text-5xl md:text-6xl font-normal text-[#1f4d7a] leading-tight"
+                >
+                    Frank Eithan
+                </h1>
+                <h2
+                    class="font-crimson text-lg md:text-xl font-semibold text-[#1f4d7a] tracking-[0.25em] uppercase mt-2"
+                >
+                    Montaño Rojas
+                </h2>
+            </div>
+
+            <!-- Botón -->
+            <div class="flex justify-center px-4">
+                <button
+                    id="btn-abrir"
+                    class="w-full max-w-[280px] px-8 py-3 bg-[#1f4d7a] hover:bg-[#3a6fa0] rounded-full text-white font-crimson text-[13px] uppercase tracking-[0.15em] shadow-lg transition-all duration-300 active:scale-95 cursor-pointer font-semibold"
+                >
+                    Ingresar a mi Invitación
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@400;500&display=swap"
+    rel="stylesheet"
+/>
+
+<style>
+    body {
+        overflow: hidden;
+        height: 100vh;
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // Flotación solo flores de arriba
+        gsap.to("#hoja-1", {
+            y: -10,
+            duration: 4,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+        });
+        gsap.to("#hoja-2", {
+            y: -8,
+            duration: 4.5,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            delay: 0.5,
+        });
+
+        // Flotación paloma
+        gsap.to("#portada-paloma", {
+            y: -8,
+            duration: 2.6,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+        });
+
+        // Pulsación botón
+        gsap.to("#btn-abrir", {
+            scale: 1.04,
+            duration: 1.5,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+            delay: 1,
+        });
+
+        // Cierre con música
+        const btnAbrir = document.getElementById("btn-abrir");
+        const portadaSection = document.getElementById("portada-section");
+
+        btnAbrir?.addEventListener("click", () => {
+            const audio = new Audio("/musica/tres.mp3");
+            audio.loop = true;
+            audio.volume = 0.5;
+            audio.play().catch((err) => console.log("Error audio:", err));
+
+            (window as any).audioGlobal = audio;
+            (window as any).estaReproduciendoGlobal = true;
+
+            gsap.to(portadaSection, {
+                opacity: 0,
+                scale: 1.1,
+                duration: 0.8,
+                ease: "power2.in",
+                onComplete: () => {
+                    document.body.style.overflow = "auto";
+                    document.body.style.height = "auto";
+                    portadaSection?.remove();
+                },
+            });
+        });
+    });
+</script>

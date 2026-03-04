@@ -1,0 +1,195 @@
+---
+// ContadorRegresivo.astro
+---
+
+<section class="relative w-full py-8 px-6 overflow-hidden">
+    <div class="max-w-md mx-auto relative z-10" id="contenedor-contador">
+        <!-- Etiqueta "Faltan" -->
+        <div class="text-center mb-4" id="texto-faltan">
+            <p
+                class="text-sm uppercase font-crimson font-light text-[#4a7a9b] tracking-[0.3em]"
+            >
+                Solo faltan
+            </p>
+        </div>
+
+        <!-- Card contador -->
+        <div
+            class="border border-[#a8c4dc] rounded-2xl py-6 px-6 shadow-sm bg-white/40 backdrop-blur-sm"
+            id="card-contador"
+        >
+            <div class="grid grid-cols-4 gap-3">
+                <!-- DÍAS -->
+                <div class="text-center">
+                    <p
+                        id="dias"
+                        class="font-[Dancing_Script] text-4xl md:text-5xl font-bold mb-1 text-[#1f4d7a] leading-none"
+                    >
+                        00
+                    </p>
+                    <p
+                        class="font-crimson text-[10px] md:text-xs uppercase tracking-widest text-[#4a7a9b]"
+                    >
+                        Días
+                    </p>
+                </div>
+
+                <!-- HORAS -->
+                <div class="text-center">
+                    <p
+                        id="horas"
+                        class="font-[Dancing_Script] text-4xl md:text-5xl font-bold mb-1 text-[#1f4d7a] leading-none"
+                    >
+                        00
+                    </p>
+                    <p
+                        class="font-crimson text-[10px] md:text-xs uppercase tracking-widest text-[#4a7a9b]"
+                    >
+                        Hrs
+                    </p>
+                </div>
+
+                <!-- MINUTOS -->
+                <div class="text-center">
+                    <p
+                        id="minutos"
+                        class="font-[Dancing_Script] text-4xl md:text-5xl font-bold mb-1 text-[#1f4d7a] leading-none"
+                    >
+                        00
+                    </p>
+                    <p
+                        class="font-crimson text-[10px] md:text-xs uppercase tracking-widest text-[#4a7a9b]"
+                    >
+                        Mins
+                    </p>
+                </div>
+
+                <!-- SEGUNDOS -->
+                <div class="text-center">
+                    <p
+                        id="segundos"
+                        class="font-[Dancing_Script] text-4xl md:text-5xl font-bold mb-1 text-[#1f4d7a] leading-none"
+                    >
+                        00
+                    </p>
+                    <p
+                        class="font-crimson text-[10px] md:text-xs uppercase tracking-widest text-[#4a7a9b]"
+                    >
+                        Segs
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap"
+    rel="stylesheet"
+/>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ═══ CONFIGURACIÓN DE LA FECHA ═══
+    const FECHA_EVENTO = {
+        año: 2026,
+        mes: 3, // Marzo
+        dia: 14,
+        hora: 14,
+        minuto: 0,
+    };
+
+    const initContador = () => {
+        // Estado inicial — todo oculto
+        gsap.set("#texto-faltan", { opacity: 0, y: -20 });
+        gsap.set("#card-contador", { opacity: 0, y: 30, scale: 0.95 });
+        gsap.set("#dias, #horas, #minutos, #segundos", { opacity: 0, y: 15 });
+
+        const tl = gsap.timeline({
+            paused: true,
+            defaults: { ease: "power3.out" },
+        });
+
+        tl
+            // "Solo faltan" baja suave desde arriba
+            .to("#texto-faltan", { opacity: 1, y: 0, duration: 0.9 }, 0)
+            // Card sube con leve rebote
+            .to(
+                "#card-contador",
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 1.1,
+                    ease: "back.out(1.3)",
+                },
+                0.2,
+            )
+            // Números aparecen escalonados dentro del card
+            .to("#dias", { opacity: 1, y: 0, duration: 0.6 }, 0.55)
+            .to("#horas", { opacity: 1, y: 0, duration: 0.6 }, 0.68)
+            .to("#minutos", { opacity: 1, y: 0, duration: 0.6 }, 0.81)
+            .to("#segundos", { opacity: 1, y: 0, duration: 0.6 }, 0.94);
+
+        // Dispara una sola vez al entrar al viewport
+        ScrollTrigger.create({
+            trigger: "#contenedor-contador",
+            start: "top 90%",
+            once: true,
+            onEnter: () => tl.play(),
+        });
+
+        // ═══ CUENTA REGRESIVA ═══
+        const fechaEvento = new Date(
+            FECHA_EVENTO.año,
+            FECHA_EVENTO.mes - 1,
+            FECHA_EVENTO.dia,
+            FECHA_EVENTO.hora,
+            FECHA_EVENTO.minuto,
+            0,
+        ).getTime();
+
+        function actualizar() {
+            const ahora = new Date().getTime();
+            const diff = fechaEvento - ahora;
+
+            const diasEl = document.getElementById("dias");
+            const horasEl = document.getElementById("horas");
+            const minutosEl = document.getElementById("minutos");
+            const segundosEl = document.getElementById("segundos");
+
+            if (diff > 0) {
+                const d = Math.floor(diff / 86400000);
+                const h = Math.floor((diff % 86400000) / 3600000);
+                const m = Math.floor((diff % 3600000) / 60000);
+                const s = Math.floor((diff % 60000) / 1000);
+
+                if (diasEl) diasEl.textContent = String(d).padStart(2, "0");
+                if (horasEl) horasEl.textContent = String(h).padStart(2, "0");
+                if (minutosEl)
+                    minutosEl.textContent = String(m).padStart(2, "0");
+                if (segundosEl)
+                    segundosEl.textContent = String(s).padStart(2, "0");
+            } else {
+                [diasEl, horasEl, minutosEl, segundosEl].forEach((el) => {
+                    if (el) el.textContent = "00";
+                });
+            }
+        }
+
+        actualizar();
+        setInterval(actualizar, 1000);
+    };
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initContador);
+    } else {
+        initContador();
+    }
+
+    document.addEventListener("astro:page-load", initContador);
+</script>

@@ -1,0 +1,197 @@
+---
+// PrimerosPasos.astro
+---
+
+<section
+    class="relative w-full py-10 px-6 overflow-hidden flex flex-col items-center"
+>
+    <!-- Flores decorativas esquina superior izquierda -->
+    <div class="absolute top-0 left-0 pointer-events-none z-0">
+        <img
+            src="/imagenes/florLateral.png"
+            alt=""
+            class="w-28 md:w-36 h-auto object-contain opacity-60"
+        />
+    </div>
+
+    <!-- Flores decorativas esquina inferior derecha -->
+    <div class="absolute bottom-0 right-0 pointer-events-none z-0 scale-x-[-1]">
+        <img
+            src="/imagenes/florLateral.png"
+            alt=""
+            class="w-28 md:w-36 h-auto object-contain opacity-60"
+        />
+    </div>
+
+    <!-- Título -->
+    <div id="pp-titulo" class="relative z-10 mb-8 opacity-0">
+        <h2 class="font-[Dancing_Script] text-4xl md:text-5xl text-[#3a6fa0]">
+            Primeros pasos
+        </h2>
+    </div>
+
+    <!-- Polaroid slider -->
+    <div id="pp-polaroid" class="relative z-10 opacity-0">
+        <div class="polaroid-wrapper">
+            <!-- Foto 1 -->
+            <div class="polaroid-slide active" id="slide-1">
+                <div
+                    class="bg-white p-3 pb-8 shadow-[4px_8px_24px_rgba(0,0,0,0.18)] rotate-[-2deg]"
+                >
+                    <img
+                        src="/imagenes/foto13.png"
+                        alt="Primeros pasos"
+                        class="w-56 h-72 md:w-64 md:h-80 object-cover block"
+                    />
+                </div>
+            </div>
+
+            <!-- Foto 2 -->
+            <div class="polaroid-slide" id="slide-2">
+                <div
+                    class="bg-white p-3 pb-8 shadow-[4px_8px_24px_rgba(0,0,0,0.18)] rotate-[2deg]"
+                >
+                    <img
+                        src="/imagenes/foto14.png"
+                        alt="Primeros pasos"
+                        class="w-56 h-72 md:w-64 md:h-80 object-cover block"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <!-- Indicadores -->
+        <div class="flex justify-center gap-2 mt-6">
+            <div
+                class="dot w-2 h-2 rounded-full bg-[#1f4d7a] opacity-100 transition-opacity duration-300"
+                id="dot-1"
+            >
+            </div>
+            <div
+                class="dot w-2 h-2 rounded-full bg-[#1f4d7a] opacity-30 transition-opacity duration-300"
+                id="dot-2"
+            >
+            </div>
+        </div>
+    </div>
+
+    <!-- Separador dorado -->
+    <div
+        id="pp-sep"
+        class="flex items-center gap-3 mt-8 opacity-0 relative z-10"
+    >
+        <div class="h-px w-20 bg-gradient-to-r from-transparent to-[#c9a84c]">
+        </div>
+        <svg
+            width="10"
+            height="10"
+            viewBox="0 0 20 20"
+            fill="#c9a84c"
+            class="opacity-80 flex-shrink-0"
+        >
+            <path
+                d="M10 2 L11.5 8 L18 8 L12.5 12 L14.5 18 L10 14 L5.5 18 L7.5 12 L2 8 L8.5 8 Z"
+            ></path>
+        </svg>
+        <div class="h-px w-20 bg-gradient-to-l from-transparent to-[#c9a84c]">
+        </div>
+    </div>
+</section>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap"
+    rel="stylesheet"
+/>
+
+<style>
+    .polaroid-wrapper {
+        position: relative;
+        width: 260px;
+        height: 340px;
+    }
+    @media (min-width: 768px) {
+        .polaroid-wrapper {
+            width: 300px;
+            height: 380px;
+        }
+    }
+    .polaroid-slide {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition:
+            opacity 0.8s ease,
+            transform 0.8s ease;
+        transform: scale(0.97);
+    }
+    .polaroid-slide.active {
+        opacity: 1;
+        transform: scale(1);
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // Animación entrada
+        gsap.set("#pp-titulo, #pp-polaroid, #pp-sep", { opacity: 0, y: 20 });
+
+        ScrollTrigger.create({
+            trigger: "#pp-titulo",
+            start: "top 85%",
+            onEnter: () => {
+                const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+                tl.to("#pp-titulo", { opacity: 1, y: 0, duration: 1 })
+                    .to(
+                        "#pp-polaroid",
+                        { opacity: 1, y: 0, duration: 1 },
+                        "-=0.5",
+                    )
+                    .to(
+                        "#pp-sep",
+                        { opacity: 1, y: 0, duration: 0.8 },
+                        "-=0.4",
+                    );
+            },
+            onLeaveBack: () => {
+                gsap.to("#pp-titulo, #pp-polaroid, #pp-sep", {
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.4,
+                });
+            },
+        });
+
+        // Slider automático
+        let current = 1;
+        const total = 2;
+        const interval = 3500;
+
+        function goTo(index: number) {
+            // Quitar active del actual
+            const prevSlide = document.getElementById(`slide-${current}`);
+            const prevDot = document.getElementById(`dot-${current}`);
+            prevSlide?.classList.remove("active");
+            if (prevDot) prevDot.style.opacity = "0.3";
+
+            // Activar nuevo
+            current = index;
+            const nextSlide = document.getElementById(`slide-${current}`);
+            const nextDot = document.getElementById(`dot-${current}`);
+            nextSlide?.classList.add("active");
+            if (nextDot) nextDot.style.opacity = "1";
+        }
+
+        setInterval(() => {
+            const next = current >= total ? 1 : current + 1;
+            goTo(next);
+        }, interval);
+    });
+</script>

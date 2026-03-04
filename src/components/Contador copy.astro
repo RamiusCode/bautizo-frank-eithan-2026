@@ -1,0 +1,236 @@
+---
+// ContadorRegresivo.astro
+---
+
+<section class="relative w-full py-8 px-6 overflow-hidden">
+    <div class="max-w-md mx-auto relative z-10" id="contenedor-contador">
+        <!-- Texto superior -->
+        <!-- <p
+            class="text-center text-sm md:text-base uppercase mb-2 font-crimson font-light text-[#4a7a9b] tracking-widest"
+        >
+            Queremos que nos acompañes en<br />
+            este día tan especial:
+        </p> -->
+
+        <!-- Fecha del evento -->
+        <!-- <p
+            class="text-center text-base md:text-lg uppercase mb-6 font-crimson font-semibold text-[#1f4d7a] tracking-widest"
+        >
+            Sábado 14 de Marzo 2026
+        </p> -->
+
+        <!-- Etiqueta "Faltan" -->
+        <div class="text-center mb-4" id="texto-faltan">
+            <p
+                class="text-sm uppercase font-crimson font-light text-[#4a7a9b] tracking-[0.3em]"
+            >
+                Solo faltan
+            </p>
+        </div>
+
+        <!-- Card contador -->
+        <div
+            class="border border-[#a8c4dc] rounded-2xl py-6 px-6 shadow-sm bg-white/40 backdrop-blur-sm"
+            id="card-contador"
+        >
+            <div class="grid grid-cols-4 gap-3">
+                <!-- DÍAS -->
+                <div class="text-center">
+                    <p
+                        id="dias"
+                        class="font-[Dancing_Script] text-4xl md:text-5xl font-bold mb-1 text-[#1f4d7a] leading-none"
+                    >
+                        00
+                    </p>
+                    <p
+                        class="font-crimson text-[10px] md:text-xs uppercase tracking-widest text-[#4a7a9b]"
+                    >
+                        Días
+                    </p>
+                </div>
+
+                <!-- HORAS -->
+                <div class="text-center">
+                    <p
+                        id="horas"
+                        class="font-[Dancing_Script] text-4xl md:text-5xl font-bold mb-1 text-[#1f4d7a] leading-none"
+                    >
+                        00
+                    </p>
+                    <p
+                        class="font-crimson text-[10px] md:text-xs uppercase tracking-widest text-[#4a7a9b]"
+                    >
+                        Hrs
+                    </p>
+                </div>
+
+                <!-- MINUTOS -->
+                <div class="text-center">
+                    <p
+                        id="minutos"
+                        class="font-[Dancing_Script] text-4xl md:text-5xl font-bold mb-1 text-[#1f4d7a] leading-none"
+                    >
+                        00
+                    </p>
+                    <p
+                        class="font-crimson text-[10px] md:text-xs uppercase tracking-widest text-[#4a7a9b]"
+                    >
+                        Mins
+                    </p>
+                </div>
+
+                <!-- SEGUNDOS -->
+                <div class="text-center">
+                    <p
+                        id="segundos"
+                        class="font-[Dancing_Script] text-4xl md:text-5xl font-bold mb-1 text-[#1f4d7a] leading-none"
+                    >
+                        00
+                    </p>
+                    <p
+                        class="font-crimson text-[10px] md:text-xs uppercase tracking-widest text-[#4a7a9b]"
+                    >
+                        Segs
+                    </p>
+                </div>
+            </div>
+
+            <!-- Separador dorado decorativo abajo del card -->
+            <!-- <div class="flex items-center gap-3 mt-5">
+                <div
+                    class="h-px flex-1 bg-gradient-to-r from-transparent to-[#c9a84c]"
+                >
+                </div>
+                <svg
+                    width="10"
+                    height="10"
+                    viewBox="0 0 20 20"
+                    fill="#c9a84c"
+                    class="opacity-80 flex-shrink-0"
+                >
+                    <path
+                        d="M10 2 L11.5 8 L18 8 L12.5 12 L14.5 18 L10 14 L5.5 18 L7.5 12 L2 8 L8.5 8 Z"
+                    ></path>
+                </svg>
+                <div
+                    class="h-px flex-1 bg-gradient-to-l from-transparent to-[#c9a84c]"
+                >
+                </div>
+            </div> -->
+        </div>
+    </div>
+</section>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap"
+    rel="stylesheet"
+/>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ═══ CONFIGURACIÓN DE LA FECHA ═══
+    const FECHA_EVENTO = {
+        año: 2026,
+        mes: 3, // Marzo
+        dia: 14,
+        hora: 14,
+        minuto: 0,
+    };
+
+    const initContador = () => {
+        // Estado inicial
+        gsap.set("#contenedor-contador", { opacity: 0, y: 50 });
+        gsap.set("#card-contador", { opacity: 0, scale: 0.95 });
+
+        // Animación de entrada con ScrollTrigger
+        ScrollTrigger.create({
+            trigger: "#contenedor-contador",
+            start: "top 90%",
+            onEnter: () => {
+                const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+                tl.to("#contenedor-contador", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                })
+                    .to(
+                        "#texto-faltan",
+                        { opacity: 1, y: 0, duration: 0.8 },
+                        "-=0.5",
+                    )
+                    .to(
+                        "#card-contador",
+                        {
+                            opacity: 1,
+                            scale: 1,
+                            duration: 1,
+                            ease: "back.out(1.2)",
+                        },
+                        "-=0.4",
+                    );
+            },
+            onLeaveBack: () => {
+                gsap.to("#contenedor-contador", {
+                    opacity: 0,
+                    y: 50,
+                    duration: 0.5,
+                    ease: "power2.in",
+                });
+            },
+        });
+
+        // ═══ CUENTA REGRESIVA ═══
+        const fechaEvento = new Date(
+            FECHA_EVENTO.año,
+            FECHA_EVENTO.mes - 1,
+            FECHA_EVENTO.dia,
+            FECHA_EVENTO.hora,
+            FECHA_EVENTO.minuto,
+            0,
+        ).getTime();
+
+        function actualizar() {
+            const ahora = new Date().getTime();
+            const diff = fechaEvento - ahora;
+
+            const diasEl = document.getElementById("dias");
+            const horasEl = document.getElementById("horas");
+            const minutosEl = document.getElementById("minutos");
+            const segundosEl = document.getElementById("segundos");
+
+            if (diff > 0) {
+                const d = Math.floor(diff / 86400000);
+                const h = Math.floor((diff % 86400000) / 3600000);
+                const m = Math.floor((diff % 3600000) / 60000);
+                const s = Math.floor((diff % 60000) / 1000);
+
+                if (diasEl) diasEl.textContent = String(d).padStart(2, "0");
+                if (horasEl) horasEl.textContent = String(h).padStart(2, "0");
+                if (minutosEl)
+                    minutosEl.textContent = String(m).padStart(2, "0");
+                if (segundosEl)
+                    segundosEl.textContent = String(s).padStart(2, "0");
+            } else {
+                [diasEl, horasEl, minutosEl, segundosEl].forEach((el) => {
+                    if (el) el.textContent = "00";
+                });
+            }
+        }
+
+        actualizar();
+        setInterval(actualizar, 1000);
+    };
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initContador);
+    } else {
+        initContador();
+    }
+
+    document.addEventListener("astro:page-load", initContador);
+</script>
